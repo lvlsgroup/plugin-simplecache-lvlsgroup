@@ -1,0 +1,33 @@
+
+# http routing section
+http:
+  routers:
+    # Define a connection between requests and services
+    to-httpecho:
+      rule: "PathPrefix(`/test`)"
+      middlewares:
+        - addCacheHeader
+        - blacklistedHeaderTest
+      service: httpecho
+
+  middlewares:
+    addCacheHeader:
+      headers:
+        customResponseHeaders:
+          Cache-Control: "public,max-age=3600"
+    blacklistedHeaderTest:
+      plugin:
+        dev:
+          path: /var/cache
+          maxExpiry: 3600
+          cleanup: 600
+          addStatusHeader: true
+          cacheQueryParams: true
+          blacklistedHeaders:
+            - "test"
+
+  services:
+    httpecho:
+      loadBalancer:
+        servers:
+          - url: http://httpecho:5678

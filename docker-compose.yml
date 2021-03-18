@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  reverse-proxy:
+    # The official v2 Traefik docker image
+    image: traefik:v2.4
+    # Enables the web UI and tells Traefik to listen to docker
+    command: --api.insecure=true --providers.docker
+    ports:
+      - "77:8081"
+      # The Web UI (enabled by --api.insecure=true)
+      - "2121:8080"
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.yaml:/etc/traefik/traefik.yaml
+      - ./traefik-routers.yaml:/etc/traefik-config/traefik-routers.yaml
+      - .:/plugins/src/github.com/lvlsgroup/plugin-simplecache
+  httpecho:
+    image: hashicorp/http-echo:0.2.3
+    command: ["-text", 'foo']
+

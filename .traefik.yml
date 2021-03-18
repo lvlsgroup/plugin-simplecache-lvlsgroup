@@ -1,0 +1,7 @@
+displayName: Simple Cache Lvls Group
+summary: Simple cache plugin middleware caches responses on disk.
+type: middleware
+import: github.com/lvlsgroup/plugin-simplecache-lvlsgroup
+compatibility: TODO
+testData:
+  path: /tmp
