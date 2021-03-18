@@ -86,6 +86,7 @@ func (m *cache) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		if r.Header.Get(header) != "" {
 			rw := &responseWriter{ResponseWriter: w}
 			m.next.ServeHTTP(rw, r)
+
 			return
 		}
 	}
@@ -110,6 +111,7 @@ func (m *cache) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			}
 			w.WriteHeader(data.Status)
 			_, _ = w.Write(data.Body)
+
 			return
 		}
 	}
@@ -159,9 +161,10 @@ func (m *cache) cacheable(r *http.Request, w http.ResponseWriter, status int) (t
 }
 
 func (m *cache) cacheKey(r *http.Request) string {
-	if m.cfg.CacheQueryParams == true {
+	if m.cfg.CacheQueryParams {
 		return r.Method + r.Host + r.URL.Path + r.URL.RawQuery
 	}
+
 	return r.Method + r.Host + r.URL.Path
 }
 
