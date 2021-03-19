@@ -1,4 +1,4 @@
-package plugin_simplecache
+package plugin_simplecache_lvlsgroup
 
 import (
 	"bytes"
