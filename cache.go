@@ -1,4 +1,4 @@
-// Package plugin_simplecache_lvlsgroup is a plugin to cache responses to disk forked from plugin_simplecache by Traefik.
+// Package plugin_simplecache_lvlsgroup is a plugin to cache responses to disk.
 package plugin_simplecache_lvlsgroup
 
 import (
