@@ -1,5 +1,7 @@
 # Simple Cache
 
+This is a fork from https://github.com/traefik/plugin-simplecache
+
 Simple cache plugin middleware caches responses on disk.
 
 ## Configuration
